@@ -1,1 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+	http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+	http://www.springframework.org/schema/context
+	http://www.springframework.org/schema/context/spring-context-3.0.xsd">
+
+	<bean class="com.stackroute.springCore.Employee" name="a1">
+		<property name="ename" value="Mohammad zaid"/>
+		<property name="age" value="21"/>
+		<property name="city" value="Banglore"/>
+
+	</bean>
+
+
+</beans>
+
+-----------------------
+package com.stackroute.springCore;
+
+public class Employee {
+
+	String ename;
+	int age;
+	String city;
+	
+	
+	public Employee() {
+		super();
+		//TODO Auto-generated constructor stub
+	}
+	public Employee(String ename, int age, String city) {
+		super();
+		this.ename = ename;
+		this.age = age;
+		this.city = city;
+	}
+	public String getEname() {
+		return ename;
+	}
+	public void setEname(String ename) {
+		this.ename = ename;
+	}
+	public int getAge() {
+		return age;
+	}
+	public void setAge(int age) {
+		this.age = age;
+	}
+	public String getCity() {
+		return city;
+	}
+	public void setCity(String city) {
+		this.city = city;
+	}
+	@Override
+	public String toString() {
+		return "Employee [ename=" + ename + ", age=" + age + ", city=" + city + "]";
+	}
+	
+	
+}
+------------------------
+package com.stackroute.springCore;
+
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
+
+public class App {
+	public static void main(String[] args) {
+		ApplicationContext ac = new ClassPathXmlApplicationContext("/springCore/config.xml");
+		Employee e = (Employee) ac.getBean("a1");
+		System.out.println(e);
+
+	}
+}
 
