@@ -1,0 +1,21 @@
+package com.stackroute.springCore;
+
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.springframework.context.support.FileSystemXmlApplicationContext;
+
+public class App {
+	public static void main(String[] args) {
+		ApplicationContext ac = new FileSystemXmlApplicationContext("config.xml");
+		Student e = ac.getBean("student",Student.class);
+		System.out.println(e);
+		
+//		Employee e1=ac.getBean("emp",Employee.class);
+//		System.out.println(e1);
+		
+		
+
+	}
+}
+-----------------
+<context:component-scan base-package="com.stackroute.springCore"/>
