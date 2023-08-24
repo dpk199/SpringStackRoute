@@ -1,0 +1,142 @@
+package com.stackroute.springCore;
+
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.springframework.context.support.FileSystemXmlApplicationContext;
+
+public class App {
+	public static void main(String[] args) {
+		ApplicationContext ac = new FileSystemXmlApplicationContext("config.xml");
+		Student e = ac.getBean("std",Student.class);
+		System.out.println(e);
+		
+		
+
+	}
+}
+--------------
+package com.stackroute.springCore;
+
+public class Student {
+	String sname;
+	int marks;
+	Address addr;
+	
+	public Address getAddr() {
+		return addr;
+	}
+	public void setAddr(Address addr) {
+		this.addr = addr;
+	}
+	public Student(String sname, int marks, Address addr) {
+		super();
+		this.sname = sname;
+		this.marks = marks;
+		this.addr = addr;
+	}
+	public Student() {
+		super();
+		//TODO Auto-generated constructor stub
+	}
+	public Student(String sname, int marks) {
+		super();
+		this.sname = sname;
+		this.marks = marks;
+	}
+	public String getSname() {
+		return sname;
+	}
+	public void setSname(String sname) {
+		this.sname = sname;
+	}
+	public int getMarks() {
+		return marks;
+	}
+	public void setMarks(int marks) {
+		this.marks = marks;
+	}
+	@Override
+	public String toString() {
+		return "Student [sname=" + sname + ", marks=" + marks + ", addr=" + addr + "]";
+	}
+	
+
+}
+---------------------
+package com.stackroute.springCore;
+
+public class Address {
+	
+	String state;
+	String city;
+	int doorNo;
+	public Address() {
+		super();
+		//TODO Auto-generated constructor stub
+	}
+	public Address(String state, String city, int doorNo) {
+		super();
+		this.state = state;
+		this.city = city;
+		this.doorNo = doorNo;
+	}
+	public String getState() {
+		return state;
+	}
+	public void setState(String state) {
+		this.state = state;
+	}
+	public String getCity() {
+		return city;
+	}
+	public void setCity(String city) {
+		this.city = city;
+	}
+	public int getDoorNo() {
+		return doorNo;
+	}
+	public void setDoorNo(int doorNo) {
+		this.doorNo = doorNo;
+	}
+	@Override
+	public String toString() {
+		return "Address [state=" + state + ", city=" + city + ", doorNo=" + doorNo + "]";
+	}
+	
+	
+
+}
+----------------------
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+	http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+	http://www.springframework.org/schema/context
+	http://www.springframework.org/schema/context/spring-context-3.0.xsd">
+
+	
+
+	<bean class="com.stackroute.springCore.Address" name="addrObj">
+		<property name="state" value="Bihar" />
+		<property name="city" value="Gaya" />
+		<property name="doorNo" value="54"/>
+
+
+	</bean>
+	
+	
+	<bean class="com.stackroute.springCore.Student" name="std">
+		<property name="sname" value="Bihar" />
+		<property name="marks" value="95"></property>
+		<property name="addr">
+			<ref bean="addrObj"/>
+		</property>
+		
+
+
+	</bean>
+
+
+</beans>
