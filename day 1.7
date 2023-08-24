@@ -1,0 +1,113 @@
+package com.stackroute.spring.NOXML;
+
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+
+public class Main {
+	public static void main(String[] args) {
+		ApplicationContext ac = new AnnotationConfigApplicationContext(BeanGenerator.class);
+		University university = ac.getBean(University.class);
+		System.out.println(university.getUniversityName());
+	}
+
+}
+-------------------
+package com.stackroute.spring.NOXML;
+
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+
+@Configuration
+public class BeanGenerator {
+	
+	@Bean
+	public City getCityBean() {
+		 City c = new City();
+		 c.setCityName("Jaipur");
+		 c.setPopulation(2500);
+		 return c;
+	}
+	
+	@Bean
+	public University getUniversityBean() {
+		University u = new University();
+		u.setUniversityName("RCCIIT");
+		return u;
+	}
+
+}
+-----------------
+package com.stackroute.spring.NOXML;
+
+public class City {
+
+	String cityName;
+	int population;
+	public String getCityName() {
+		return cityName;
+	}
+	public void setCityName(String cityName) {
+		this.cityName = cityName;
+	}
+	public int getPopulation() {
+		return population;
+	}
+	public void setPopulation(int population) {
+		this.population = population;
+	}
+	public City(String cityName, int population) {
+		super();
+		this.cityName = cityName;
+		this.population = population;
+	}
+	public City() {
+		super();
+		//TODO Auto-generated constructor stub
+	}
+	@Override
+	public String toString() {
+		return "City [cityName=" + cityName + ", population=" + population + "]";
+	}
+	
+}
+--------
+package com.stackroute.spring.NOXML;
+
+import org.springframework.beans.factory.annotation.Autowired;
+
+public class University {
+	String universityName;
+	
+	@Autowired
+	City city;
+
+	public University(String universityName, City city) {
+		super();
+		this.universityName = universityName;
+		this.city = city;
+	}
+
+	public University() {
+		super();
+		//TODO Auto-generated constructor stub
+	}
+
+	public String getUniversityName() {
+		return universityName;
+	}
+
+	public void setUniversityName(String universityName) {
+		this.universityName = universityName;
+	}
+
+	public City getCity() {
+		return city;
+	}
+
+	public void setCity(City city) {
+		this.city = city;
+	}
+	
+
+}
+
